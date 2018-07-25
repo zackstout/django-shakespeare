@@ -5,9 +5,9 @@ from .models import PlayName, PlayText
 import requests, datetime, time
 
 # Create your views here.
-def index(request):
+def index(request, id):
     p = PlayName.objects.all()[:20]
-    text = PlayText.objects.filter(play_id=10).order_by('act', 'scene', 'lineno')
+    text = PlayText.objects.filter(play_id=id).order_by('act', 'scene', 'lineno')
 
     # return HttpResponse(text)
     context = {'text': text}

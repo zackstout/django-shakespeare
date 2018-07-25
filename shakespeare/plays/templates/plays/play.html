@@ -1,6 +1,19 @@
 
 <!-- {{ text }} -->
 
-{% for t in text %}
-<p> {{t.act}}, {{t.scene}}, {{t.lineno}}, {{t.text}} </p>
-{% endfor %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    {% load static %}
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+
+  </head>
+  <body>
+    {% for t in text %}
+    <p> {{t.act}}.{{t.scene}}.{{t.lineno}}, {{t.speaker}}: {{t.text}} </p>
+    {% endfor %}
+
+  </body>
+</html>
