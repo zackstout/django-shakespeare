@@ -10,9 +10,14 @@ An app to let users post comments, questions, and connections about and among th
 
 ## Features
 - Pinging 'localhost:8000/plays/16' returns the text of King Lear, the play with id 16 in our database.
+- Text is split up by speaker, and each line has a Comment button that takes you to a new URL with a form (with a Go Back button taking you back to the play).
+- User can add comment, which posts data to the server and updates the database, and redirects user back to plays view.
+- User can see number of comments attached to each line.
 
 ## Notes:
 - Look into adding aliases for migrations and running server.
 - We did [https://github.com/zackstout/shakespeare-to-database](scraping and database cleaning/prep) with Node, then gave this app access to the db.
   - (The query is ugly, but the basic idea is this: currently the database is a group of Play tables, and we want it to become a table of lines and a table of play names. We loop through the plays tables, grab all the data from each one, use another query to find the new ID of that play, and then update the new lines table accordingly.)
   - We messed up the execution, so plays 19, 20 and 21 have all rows duplicated.
+- Using Django makes me feel like I've been doing database querying wrong this whole time, writing out all the queries by hand. Using models makes so much more sense.
+- Should add a base `layout.html` and `extend` all templates from that. (would, for one thing, give us favicon everywhere)

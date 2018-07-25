@@ -6,11 +6,13 @@ from . import views
 
 urlpatterns = [
     path('<int:id>', views.index, name="index"),
+    path('comment/<int:id>', views.comment, name="comment"),
+    # path('addcomment/<int:id>', views.addcomment, name="addcomment"),
+
     path(r'^favicon.ico$',
-        RedirectView.as_view( # the redirecting function
+        RedirectView.as_view(
             url=staticfiles_storage.url('img/favicon.ico'), # converts the static directory + our favicon into a URL
-            # in my case, the result would be http://www.tumblingprogrammer.com/static/img/favicon.ico
         ),
-        name="favicon" # name of our view
+        name="favicon"
     ),
 ]
