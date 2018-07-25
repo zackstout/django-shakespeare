@@ -5,12 +5,22 @@ from .models import PlayName, PlayText, Comment
 import requests, datetime, time, re
 
 # Create your views here.
-def index(request, id):
-    p = PlayName.objects.all()[:20]
-    text = PlayText.objects.filter(play_id=id).order_by('act', 'scene', 'lineno')
-    prevSpeaker = 'ahhhh'
+def index(request, id, act=0, scene=0):
+    # p = PlayName.objects.all()[:20]
 
-    clipped = text[4:200]
+    if request.method == "POST":
+        act = request.POST['act']
+        scene = request.POST['scene']
+        print(act, scene)
+
+    if act==0:
+        text = PlayText.objects.filter(play_id=id).order_by('act', 'scene', 'lineno')
+        clipped = text[4:200]
+    else:
+        text = PlayText.objects.filter(play_id=id,act=act,scene=scene).order_by('act', 'scene', 'lineno')
+        clipped = text
+
+    prevSpeaker = ''
 
     # Just grabbing first 200 lines for now, because counting is costly:
     for t in clipped:
@@ -35,7 +45,7 @@ def index(request, id):
     context = {
         'text': clipped,
         'title': title.strip(),
-        # 'play_id': id
+        'play_id': id
     }
 
     return render(request, 'plays/play.html', context)

@@ -15,31 +15,51 @@
   <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-  <h3>{{ title }}</h3>
-  {% for t in text %}
-  <p>
-    {% if t.showSpeaker %}
-    {{ t.speaker }}: <br/>
-    {% endif %}
+  <div class="col-md-7">
+    <h3>{{ title }}</h3>
+    {% for t in text %}
+    <p>
+      {% if t.showSpeaker %}
+      {{ t.speaker }}: <br/>
+      {% endif %}
 
-    {{ t.act }}.{{ t.scene }}.{{ t.lineno }} &emsp; &emsp;
-    {{ t.text }}
-    <!-- <button data-id={{t.id}} class="comment" href="/comments/{{t.id}}">Comment</button> -->
-    <a class="comment" href="{% url 'comment' t.id %}">Comment</a> &emsp; &emsp;
+      {{ t.act }}.{{ t.scene }}.{{ t.lineno }} &emsp; &emsp;
+      {{ t.text }}
+      <!-- <button data-id={{t.id}} class="comment" href="/comments/{{t.id}}">Comment</button> -->
+      <a class="comment" href="{% url 'comment' t.id %}">Comment</a> &emsp; &emsp;
 
-    <span class="comment">{{ t.num_comments }}</span>
+      <span class="comment">{{ t.num_comments }}</span>
 
-  </p>
-  {% endfor %}
+    </p>
+    {% endfor %}
+  </div>
+
+  <div class="col-md-5" >
+    <form action="{% url 'index' play_id %}" method="post">
+      {% csrf_token %}
+      Act: <input type="text" name="act" class="actSearch">
+      Scene: <input type="text" name="scene" class="sceneSearch">
+      <button type="submit" name="button">Search</button>
+    </form>
+
+    <!-- <button data-play="{{ play_id }}" class="search">Search</button> -->
+  </div>
+
 
   <script type="text/javascript">
     $(document).ready(function() {
-      $('body').on('click', '.comment', function() {
-        const id = $(this).data('id');
-        console.log(id);
-        // $.ajax({
-        //
-        // })
+      $('body').on('click', '.search', function() {
+        // const id = $(this).data('id');
+        // console.log(id);
+      //   const play = $(this).data('play');
+      //   const act = $('.actSearch').val();
+      //   const scene = $('.sceneSearch').val();
+      //   console.log(play, act, scene);
+      //   $.ajax({
+      //     url: `plays/${play}/${act}/${scene}`,
+      //     method: "GET"
+      //   }).then(res => console.log(res))
+      //     .catch(err => console.log(err));
       });
     });
   </script>
