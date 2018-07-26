@@ -8,3 +8,7 @@ body {
 .comment {
   font-size: 10px;
 }
+
+.searchBar {
+  padding: 40px;
+}

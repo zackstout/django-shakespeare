@@ -5,10 +5,10 @@ from django.views.generic.base import RedirectView
 from . import views
 
 urlpatterns = [
-    path('<int:id>/<int:act>/<int:scene>', views.index, name="index"),
+    path('<int:id>/<int:act>/<int:scene>/<str:word>', views.index, name="index"),
+    # path('word/<str:word>', views.index, name="index"),
     path('<int:id>', views.index, name="index"),
     path('comment/<int:id>', views.comment, name="comment"),
-    # path('addcomment/<int:id>', views.addcomment, name="addcomment"),
 
     path(r'^favicon.ico$',
         RedirectView.as_view(

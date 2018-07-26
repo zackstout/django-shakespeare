@@ -1,15 +1,12 @@
 
-Commenting on line with ID {{ id }}!
+Line: <i> {{ text }} </i>
 
 <br />
-
-<i> {{ text }} </i>
-
-<br/ >
+<br />
 
 <form action="{% url 'comment' id %}" method="post">
   {% csrf_token %}
-  <textarea name="commentInput" cols="50" rows="20" id="commentInput"></textarea>
+  <textarea name="commentInput" cols="35" rows="12" id="commentInput"></textarea>
   <button type="submit" name="button">Submit</button>
 </form>
 
