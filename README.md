@@ -13,6 +13,8 @@ An app to let users post comments, questions, and connections about and among th
 - Text is split up by speaker, and each line has a Comment button that takes you to a new URL with a form (with a Go Back button taking you back to the play).
 - User can add comment, which posts data to the server and updates the database, and redirects user back to plays view.
 - User can see number of comments attached to each line.
+- User can search for a particular scene, and get just those lines.
+- User can click a particular word and see a list of all the lines in the play in which the word appears.
 
 ## Notes:
 - Look into adding aliases for migrations and running server.
