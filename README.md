@@ -23,3 +23,4 @@ An app to let users post comments, questions, and connections about and among th
   - We messed up the execution, so plays 19, 20 and 21 have all rows duplicated.
 - Using Django makes me feel like I've been doing database querying wrong this whole time, writing out all the queries by hand. Using models makes so much more sense.
 - Should add a base `layout.html` and `extend` all templates from that. (would, for one thing, give us favicon everywhere)
+- Ahhh we're running into the familiar problem: if we cleanse the words of punctuation for clicking purposes, the punctuation is gone.

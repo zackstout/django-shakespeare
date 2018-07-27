@@ -9,6 +9,7 @@ urlpatterns = [
     # path('word/<str:word>', views.index, name="index"),
     path('<int:id>', views.index, name="index"),
     path('comment/<int:id>', views.comment, name="comment"),
+    path('comments/<int:id>', views.comments, name="comments"),
 
     path(r'^favicon.ico$',
         RedirectView.as_view(

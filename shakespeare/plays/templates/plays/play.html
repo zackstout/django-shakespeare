@@ -4,86 +4,65 @@
 <head>
   <meta charset="utf-8">
   <title></title>
+
   {% load static %}
   <link rel="icon" href="{% static 'favicon.ico' %}">
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
+
 <body>
-  <div class="col-md-9">
-    <h3>{{ title }}</h3>
-    {% for t in text %}
-    <p>
-      {% if t.showSpeaker %}
-      <b>{{ t.speaker }}</b>: <br/>
-      {% endif %}
 
-      {{ t.act }}.{{ t.scene }}.{{ t.lineno }} &emsp; &emsp;
-
-      {% for w in t.words %}
-        <a class="word" data-word="{{ w }}" href="{% url 'index' play_id 0 0 w %}">{{ w }} </a>
-      {% endfor %}
-      <!-- {{ t.text }} -->
-      <!-- <button data-id={{t.id}} class="comment" href="/comments/{{t.id}}">Comment</button> -->
-      <a class="comment" href="{% url 'comment' t.id %}">Comment</a> &emsp; &emsp;
-
-      <span class="comment">{{ t.num_comments }}</span>
-
-    </p>
-    {% endfor %}
-  </div>
-
-  <div class="col-md-3 searchBar">
+  <div class="row">
     <form action="{% url 'index' play_id %}" method="post">
       {% csrf_token %}
-      Act: <input type="text" name="act" class="actSearch">
-      Scene: <input type="text" name="scene" class="sceneSearch">
-      <button type="submit" name="button">Search</button>
+      Act: <input type="text" name="act" class="actSearch"> <br />
+      Scene: <input type="text" name="scene" class="sceneSearch"> <br />
+      <button type="submit" name="button">Search</button> <br />
     </form>
+  </div>
 
-    {% if wordInfo %}
-      <div class="">
-        {{ word }}
-        <ul>
-          {% for w in word_info %}
-            <li>{{ w }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
+  <div class="row">
+    <div class="col-md-7">
+      <h3>{{ title }}</h3>
+      {% for t in text %}
+      <p>
+        {% if t.showSpeaker %}
+        <b>{{ t.speaker }}</b>: <br/>
+        {% endif %}
 
-    <!-- <button data-play="{{ play_id }}" class="search">Search</button> -->
+        {{ t.act }}.{{ t.scene }}.{{ t.lineno }} &emsp; &emsp;
+
+        {% for w in t.words %}
+          <a class="word" href="{% url 'index' play_id 0 0 w %}">{{ w }} </a>
+        {% endfor %}
+
+        <a class="comment" href="{% url 'comment' t.id %}">Comment</a> &emsp; &emsp;
+
+        <a class="comment" href="{% url 'comments' t.id %}">{{ t.num_comments }}</a>
+
+      </p>
+      {% endfor %}
+    </div>
+
+    <div class="col-md-5 searchBar">
+      {% if word %}
+        <div class="">
+          {{ word }}
+          <ul>
+            {% for w in word_info %}
+              <li>{{ w.text }} (--{{ w.speaker }}, {{ w.act }}.{{ w.scene }}.{{ w.lineno }})</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
   </div>
 
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('body').on('click', '.word', function() {
-        console.log($(this).data('word'));
-
-        // $.ajax({
-        //   url:
-        // })
-
-
-        // const id = $(this).data('id');
-        // console.log(id);
-      //   const play = $(this).data('play');
-      //   const act = $('.actSearch').val();
-      //   const scene = $('.sceneSearch').val();
-      //   console.log(play, act, scene);
-      //   $.ajax({
-      //     url: `plays/${play}/${act}/${scene}`,
-      //     method: "GET"
-      //   }).then(res => console.log(res))
-      //     .catch(err => console.log(err));
-      });
-    });
-  </script>
 </body>
 </html>

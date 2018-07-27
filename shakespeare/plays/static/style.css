@@ -12,3 +12,7 @@ body {
 .searchBar {
   padding: 40px;
 }
+
+.word {
+  color: black;
+}
